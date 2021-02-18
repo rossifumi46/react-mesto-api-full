@@ -28,7 +28,7 @@ app.use(requestLogger); // подключаем логгер запросов
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
-    password: Joi.string().required.min(8),
+    password: Joi.string().required().min(8),
   }),
 }), createUser);
 
