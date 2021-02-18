@@ -1,0 +1,26 @@
+.profile__avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 26px;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile__avatar-edit {
+  content: url('../../../images/avatar.svg');
+  display: none;
+  object-fit: cover;
+
+}
+
+.profile__avatar:hover .profile__avatar-edit {
+  display: block;
+}
+
+.profile__avatar:hover {
+  opacity: 0.4;
+}

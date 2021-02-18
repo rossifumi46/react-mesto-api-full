@@ -1,0 +1,3 @@
+.profile__edit-button:hover .profile__edit-button-img {
+  content: url('../../../images/edit_button_hover.svg');
+}

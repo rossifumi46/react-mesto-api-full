@@ -1,0 +1,21 @@
+@import url(./__wrapper/element__wrapper.css);
+@import url(./__image/element__image.css);
+@import url(./__title/element__title.css);
+@import url(./__like-button/element__like-button.css);
+@import url('./__trash-button/element__trash-button.css');
+@import url('./_liked/element_liked.css');
+
+.element {
+  background-color: #FFF;
+  border-radius: 10px;
+  color: #000;
+  height: 381px;
+  position: relative;
+}
+
+.element__likes {
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0;
+  text-align: center;
+}

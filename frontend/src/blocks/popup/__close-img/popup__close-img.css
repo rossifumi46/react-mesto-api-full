@@ -1,0 +1,3 @@
+.popup__close:hover .popup__close-img {
+  content: url('../../../images/close_icon_hover.svg');
+}

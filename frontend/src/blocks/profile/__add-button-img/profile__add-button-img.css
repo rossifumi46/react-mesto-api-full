@@ -1,0 +1,3 @@
+.profile__add-button:hover .profile__add-button-img {
+  content: url('../../../images/add_button_hover.svg');
+}

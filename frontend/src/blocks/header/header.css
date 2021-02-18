@@ -1,0 +1,140 @@
+@import url('./__logo/header__logo.css');
+
+.header {
+  max-width: 882px;
+  margin: 0 auto;
+}
+
+.header:after {
+  content: '';
+  display: block;
+  height: 40px;
+  border-bottom: 1px solid #545454;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .header {
+    width: 100%;
+  }
+
+  .header:after {
+    height: 32px;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header {
+    max-width: 582px;
+  }
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 45px;
+  position: relative;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .header__wrapper {
+    padding: 0 30px;
+    padding-top: 28px;
+  }
+  
+  .header__wrapper_open {
+    padding-top: 6px;
+  }
+}
+
+.header__link {
+  text-decoration: none;
+  color: #FFF;
+  font-family: Inter;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.header__link:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .header__btn {
+    margin-top: 18px;
+  }
+}
+
+.header__btn {
+  padding: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  margin-left: 24px;
+  border: none;
+  background: none;
+  color: #A9A9A9;
+  cursor: pointer;
+}
+
+.header__user {
+  display: flex;
+}
+
+.header__mobile-user {
+  display: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .header__user {
+    display: none;
+  }
+
+  .open {
+    display: block;
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 1px solid #545454;
+  }
+}
+
+.btn {
+  display: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .btn {
+    display: block;
+    background: url(../../images/burger_menu.svg);
+    width: 24px;
+    height: 21px;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+
+  .btn_close {
+    background: url(../../images/burger_close.svg);
+    width: 43px;
+    height: 43px;
+    bottom: -11px;
+    position: relative;
+  }
+}
+
+.header__email {
+  margin: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}

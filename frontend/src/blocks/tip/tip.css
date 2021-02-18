@@ -1,0 +1,17 @@
+.tip__title {
+  color: #000;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.tip__img {
+  width: 120px;
+  height: 120px;
+}
+
+.tip {
+  align-items: center;
+}
