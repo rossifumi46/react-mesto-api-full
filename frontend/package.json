@@ -15,7 +15,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "npm run build && scp -r ./dist/* c4rdesigner@130.193.34.148:/home/c4rdesigner/frontend-dist",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
