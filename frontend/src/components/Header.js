@@ -8,13 +8,15 @@ const Header = ({ link, handleSignout }) => {
   const [open, setOpen] = useState(false);
   return (
     <header className="header">
-      <div className={`header__mobile-user ${open ? 'open' : ''}`}>
-        <p className="header__email">{currentUser.email}</p>
-        <button onClick={handleSignout} className="header__btn">Выйти</button>
-      </div>
+      {currentUser &&
+        <div className={`header__mobile-user ${open ? 'open' : ''}`}>
+          <p className="header__email">{currentUser.email}</p>
+          <button onClick={handleSignout} className="header__btn">Выйти</button>
+        </div>
+      }
       <div className={`header__wrapper ${ open ? 'header__wrapper_open' : ''}`}>
         <img src={logo} alt="лого" className="header__logo"/>
-        {currentUser.email
+        {currentUser
           ? (
             <div className="header__menu">
               <button className={`btn ${open ? 'btn_close' : ''}`} onClick={() => setOpen(!open)} />

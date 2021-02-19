@@ -198,7 +198,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        {currentUser && < Header link={ location.pathname === '/signin' ?  signin : signup} handleSignout={handleSignout}/>}
+        <Header link={ location.pathname === '/signin' ?  signin : signup} handleSignout={handleSignout}/>
         <Switch>
           <Route path="/signup">
             {!loggedIn ? <Register handleSignup={handleSignup} /> : <Redirect to="/" />}
