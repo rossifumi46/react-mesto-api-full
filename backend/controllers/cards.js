@@ -6,8 +6,7 @@ const BadRequestError = require('../errors/bad-request-err');
 
 module.exports.getCards = (req, res, next) => {
   Card.find()
-    .populate('owner')
-    .then((card) => res.send({ data: card }))
+    .then((cards) => res.send({ data: cards }))
     .catch(next);
 };
 
@@ -33,10 +32,10 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(cardId)
     .orFail(() => { throw new NotFoundError('Карточка не найдена'); })
     .then((card) => {
-      if (card.owner !== owner) {
+      if (card.owner.toString() !== owner) {
         throw new PermissionError('Вы не можете удалить карточку');
       }
-      return findByIdAndRemove(cardId);
+      return Card.findByIdAndRemove(cardId);
     })
     .then((card) => res.send({ data: card }))
     .catch(next);
