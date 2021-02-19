@@ -26,7 +26,6 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
-  const [account, setAccount] = useState({})
   const [loggedIn, setLoggedIn] =  useState(false);
   const [infoTip, setInfoTip] = useState({show: false});
   
@@ -34,31 +33,25 @@ function App() {
   const signup = { route: '/signin', name: "Войти" };
 
   useEffect(() => {
-    api.getInitialCards()
-    .then(initialCards => {
-      setCards(initialCards);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }, []);
-
-  useEffect(() => {
-    api.getProfile()
-      .then(userData => {
-        setCurrentUser(userData);
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.setToken(token);
+      api.getInitialCards()
+      .then(res => {
+        setCards(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+    }  
   }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token){
+    if (token) {
       authApi.checkToken(token)
       .then(res => {
-        setAccount(res.data);
+        setCurrentUser(res.data);
         setLoggedIn(true);
       })
       .catch(err => {
@@ -69,13 +62,13 @@ function App() {
 
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.like(card._id, isLiked)
-      .then(newCard => {
+      .then(res => {
         // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-        const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        const newCards = cards.map((c) => c._id === card._id ? res.data : c);
         // Обновляем стейт
         setCards(newCards);
       })
@@ -121,7 +114,7 @@ function App() {
   const handleUpdateUser = (user) => {
     api.editProfile(user)
       .then(res => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -131,8 +124,8 @@ function App() {
 
   const handleAddPlaceSubmit = (card) => {
     api.createCard(card)
-      .then(newCard => {
-        setCards([newCard, ...cards]);
+      .then(res => {
+        setCards([res.data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {
@@ -143,7 +136,7 @@ function App() {
   const handleUpdateAvatar = (avatar) => {
     api.updateAvatar(avatar)
       .then(res => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -162,7 +155,7 @@ function App() {
       .then(res => {
         return authApi.checkToken(localStorage.getItem('token'));
       })
-      .then(res => setAccount(res.data))
+      .then(res => setCurrentUser(res.data))
       .catch((err) => {
         console.log(err);
       });
@@ -187,7 +180,7 @@ function App() {
 
   const handleSignout = () => {
     localStorage.removeItem('token');
-    setAccount({});
+    setCurrentUser({});
     setLoggedIn(false);
     history.push('/signin');
   }
@@ -205,7 +198,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        <Header link={ location.pathname === '/signin' ?  signin : signup} handleSignout={handleSignout} account={account}/>
+        {currentUser && < Header link={ location.pathname === '/signin' ?  signin : signup} handleSignout={handleSignout}/>}
         <Switch>
           <Route path="/signup">
             {!loggedIn ? <Register handleSignup={handleSignup} /> : <Redirect to="/" />}

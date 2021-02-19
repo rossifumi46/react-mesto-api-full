@@ -39,7 +39,7 @@ class Api {
 }
 
 const authApi = new Api({
-  baseUrl: 'https://auth.nomoreparties.co',//'https://mesto.nomoreparties.co/v1/cohort-17',
+  baseUrl: 'https://api.mesto-c4rdesigner.students.nomoreparties.space',
   headers: {
     'Content-Type': 'application/json'
   }
