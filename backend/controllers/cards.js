@@ -1,4 +1,3 @@
-const { findByIdAndRemove } = require('../models/card');
 const Card = require('../models/card');
 const PermissionError = require('../errors/permission-err');
 const NotFoundError = require('../errors/not-found-err');
@@ -20,10 +19,11 @@ module.exports.createCard = (req, res, next) => {
         const messages = [];
         if (err.errors.name) messages.push(err.errors.name.message);
         if (err.errors.link) messages.push(err.errors.link.message);
-        next(new BadRequestError(messages));
+        throw new BadRequestError(err.errors.message);
       }
       next(err);
-    });
+    })
+    .catch(next);
 };
 
 module.exports.deleteCard = (req, res, next) => {

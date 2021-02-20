@@ -10,7 +10,7 @@ usersRouter.get('/', getUsers);
 usersRouter.get('/me', getMyProfile);
 usersRouter.get('/:_id', celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().required(),
+    _id: Joi.string().hex().required().length(24),
   }),
 }), getUser);
 

@@ -10,10 +10,11 @@ const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
 const { createUser, login } = require('./controllers/users');
+const NotFoundError = require('./errors/not-found-err');
 
 require('dotenv').config();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 8000 } = process.env;
 
 const app = express();
 
@@ -73,13 +74,16 @@ app.post('/signin', celebrate({
 
 app.use('/', auth, router);
 
-app.use((req, res) => res.status(404).send({ message: 'Запрашиваемый ресурс не найден' }));
+app.use(() => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
 
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
 
 app.use(errorLogger); // подключаем логгер ошибок
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
   const { statusCode = 500, message } = err;
