@@ -39,7 +39,7 @@ class Api {
 }
 
 const authApi = new Api({
-  baseUrl: 'https://localhost:8000',//https://api.mesto-c4rdesigner.students.nomoreparties.space',
+  baseUrl: 'https://api.mesto-c4rdesigner.students.nomoreparties.space',
   headers: {
     'Content-Type': 'application/json'
   }
