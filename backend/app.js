@@ -14,7 +14,7 @@ const NotFoundError = require('./errors/not-found-err');
 
 require('dotenv').config();
 
-const { PORT = 8000 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
