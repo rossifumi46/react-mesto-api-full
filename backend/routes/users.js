@@ -23,7 +23,9 @@ usersRouter.patch('/me', celebrate({
 
 const method = (value, helpers) => {
   // Throw an error (will be replaced with 'any.custom' error)
-  if (value === '1') {
+  const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9._]+\.[a-zA-Z]+[a-zA-z\d-._~:/?#[\]@!$&'()*+,;=]*/i;
+
+  if (regex.test(value)) {
     return helpers.message('Неверный URL 1');
   }
 
