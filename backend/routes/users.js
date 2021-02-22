@@ -21,9 +21,19 @@ usersRouter.patch('/me', celebrate({
   }),
 }), updateProfile);
 
+const method = (value, helpers) => {
+  // Throw an error (will be replaced with 'any.custom' error)
+  if (value === '1') {
+    return helpers.message('Неверный URL 1');
+  }
+
+  // Return the value unchanged
+  return value;
+};
+
 usersRouter.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required(),
+    avatar: Joi.string().custom(method, 'URL validation').required(),
   }),
 }), updateAvatar);
 
