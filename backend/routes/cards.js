@@ -5,12 +5,14 @@ const {
   getCards, createCard, deleteCard, likeCard, dislikeCard,
 } = require('../controllers/cards');
 
+const urlValidator = require('../utils');
+
 cardsRouter.get('/', getCards);
 
 cardsRouter.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required(),
+    link: Joi.string().Joi.string().custom(urlValidator, 'URL validation').required(),
   }),
 }), createCard);
 

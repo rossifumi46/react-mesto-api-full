@@ -5,6 +5,8 @@ const {
   getUsers, getUser, getMyProfile, updateProfile, updateAvatar,
 } = require('../controllers/users');
 
+const urlValidator = require('../utils');
+
 usersRouter.get('/', getUsers);
 
 usersRouter.get('/me', getMyProfile);
@@ -21,21 +23,11 @@ usersRouter.patch('/me', celebrate({
   }),
 }), updateProfile);
 
-const method = (value, helpers) => {
-  // Throw an error (will be replaced with 'any.custom' error)
-  const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9._]+\.[a-zA-Z]+[a-zA-z\d-._~:/?#[\]@!$&'()*+,;=]*/i;
 
-  if (!regex.test(value)) {
-    return helpers.message('Неверный URL');
-  }
-
-  // Return the value unchanged
-  return value;
-};
 
 usersRouter.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().custom(method, 'URL validation').required(),
+    avatar: Joi.string().custom(urlValidator, 'URL validation').required(),
   }),
 }), updateAvatar);
 

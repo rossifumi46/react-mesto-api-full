@@ -19,7 +19,7 @@ module.exports.createCard = (req, res, next) => {
         const messages = [];
         if (err.errors.name) messages.push(err.errors.name.message);
         if (err.errors.link) messages.push(err.errors.link.message);
-        throw new BadRequestError(err.errors.message);
+        throw new BadRequestError(messages);
       }
       next(err);
     })
