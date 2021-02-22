@@ -5,7 +5,7 @@ const {
   getUsers, getUser, getMyProfile, updateProfile, updateAvatar,
 } = require('../controllers/users');
 
-const urlValidator = require('../utils');
+const { urlValidator } = require('../utils');
 
 usersRouter.get('/', getUsers);
 
@@ -22,8 +22,6 @@ usersRouter.patch('/me', celebrate({
     about: Joi.string().min(2).max(30),
   }),
 }), updateProfile);
-
-
 
 usersRouter.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
